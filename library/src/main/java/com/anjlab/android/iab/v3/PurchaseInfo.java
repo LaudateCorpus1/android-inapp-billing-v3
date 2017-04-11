@@ -108,4 +108,39 @@ public class PurchaseInfo implements Parcelable
                     return new PurchaseInfo[size];
                 }
             };
+
+    @SuppressWarnings("SimplifiableIfStatement")
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+
+        PurchaseInfo that = (PurchaseInfo) o;
+
+        if (!responseData.equals(that.responseData))
+        {
+            return false;
+        }
+        if (!signature.equals(that.signature))
+        {
+            return false;
+        }
+        return purchaseData.equals(that.purchaseData);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = responseData.hashCode();
+        result = 31 * result + signature.hashCode();
+        result = 31 * result + purchaseData.hashCode();
+        return result;
+    }
 }

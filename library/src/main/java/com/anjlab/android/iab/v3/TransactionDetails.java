@@ -84,15 +84,15 @@ public class TransactionDetails implements Parcelable
 			return false;
 		}
 
-		TransactionDetails details = (TransactionDetails) o;
+		TransactionDetails that = (TransactionDetails) o;
 
-		return !(orderId != null ? !orderId.equals(details.orderId) : details.orderId != null);
+		return purchaseInfo.equals(that.purchaseInfo);
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return orderId != null ? orderId.hashCode() : 0;
+		return purchaseInfo.hashCode();
 	}
 
 	@Override

@@ -82,4 +82,64 @@ public class PurchaseData implements Parcelable
                     return new PurchaseData[size];
                 }
             };
+
+    @SuppressWarnings("SimplifiableIfStatement")
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
+
+        PurchaseData that = (PurchaseData) o;
+
+        if (autoRenewing != that.autoRenewing)
+        {
+            return false;
+        }
+        if (orderId != null ? !orderId.equals(that.orderId) : that.orderId != null)
+        {
+            return false;
+        }
+        if (!packageName.equals(that.packageName))
+        {
+            return false;
+        }
+        if (!productId.equals(that.productId))
+        {
+            return false;
+        }
+        if (!purchaseTime.equals(that.purchaseTime))
+        {
+            return false;
+        }
+        if (purchaseState != that.purchaseState)
+        {
+            return false;
+        }
+        if (!developerPayload.equals(that.developerPayload))
+        {
+            return false;
+        }
+        return purchaseToken.equals(that.purchaseToken);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = orderId != null ? orderId.hashCode() : 0;
+        result = 31 * result + packageName.hashCode();
+        result = 31 * result + productId.hashCode();
+        result = 31 * result + purchaseTime.hashCode();
+        result = 31 * result + purchaseState.hashCode();
+        result = 31 * result + developerPayload.hashCode();
+        result = 31 * result + purchaseToken.hashCode();
+        result = 31 * result + (autoRenewing ? 1 : 0);
+        return result;
+    }
 }
