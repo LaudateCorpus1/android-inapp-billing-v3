@@ -9,11 +9,9 @@ import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
-public class TransactionDetailsParcelableTest
-{
+public class TransactionDetailsParcelableTest {
     @Test
-    public void testParcelable() throws Exception
-    {
+    public void testParcelable() throws Exception {
         PurchaseInfo purchaseInfo = new PurchaseInfo(ResourcesUtil.loadFile("transaction_details.json"), "signature");
 
         TransactionDetails details = new TransactionDetails(purchaseInfo);
@@ -24,9 +22,9 @@ public class TransactionDetailsParcelableTest
 
         TransactionDetails result = TransactionDetails.CREATOR.createFromParcel(parcel);
 
-        assertEquals(details.purchaseInfo, result.purchaseInfo);
+        assertEquals(details.getPurchaseInfo(), result.getPurchaseInfo());
 
         // Only check that purchase info is not null, we check its parcel implementation in its own tests
-        assertNotNull(result.purchaseInfo);
+        assertNotNull(result.getPurchaseInfo());
     }
 }

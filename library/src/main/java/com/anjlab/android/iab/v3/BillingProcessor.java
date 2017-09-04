@@ -735,25 +735,25 @@ public class BillingProcessor extends BillingBase
 		{
 			return true;
 		}
-		if (details.purchaseInfo.getPurchaseData().getPurchaseTime().before(DATE_MERCHANT_LIMIT_1)) //newest format applied // TODO nullability issues
+		if (details.getPurchaseInfo().getPurchaseData().getPurchaseTime().before(DATE_MERCHANT_LIMIT_1)) //newest format applied // TODO nullability issues
 		{
 			return true;
 		}
-		if (details.purchaseInfo.getPurchaseData().getPurchaseTime().after(DATE_MERCHANT_LIMIT_2)) //newest format applied
+		if (details.getPurchaseInfo().getPurchaseData().getPurchaseTime().after(DATE_MERCHANT_LIMIT_2)) //newest format applied
 		{
 			return true;
 		}
-		if (details.purchaseInfo.getPurchaseData().getOrderId().trim().length() == 0)
+		if (details.getPurchaseInfo().getPurchaseData().getOrderId().trim().length() == 0)
 		{
 			return false;
 		}
-		int index = details.purchaseInfo.getPurchaseData().getOrderId().indexOf('.');
+		int index = details.getPurchaseInfo().getPurchaseData().getOrderId().indexOf('.');
 		if (index <= 0)
 		{
 			return false; //protect on missing merchant id
 		}
 		//extract merchant id
-		String merchantId = details.purchaseInfo.getPurchaseData().getOrderId().substring(0, index);
+		String merchantId = details.getPurchaseInfo().getPurchaseData().getOrderId().substring(0, index);
 		return merchantId.compareTo(developerMerchantId) == 0;
 	}
 
@@ -777,11 +777,11 @@ public class BillingProcessor extends BillingBase
 		try
 		{
 			TransactionDetails transaction = getPurchaseTransactionDetails(productId, cachedProducts);
-			if (transaction != null && !TextUtils.isEmpty(transaction.purchaseToken))
+			if (transaction != null && !TextUtils.isEmpty(transaction.getPurchaseInfo().getPurchaseData().getPurchaseToken())) // TODO nullability
 			{
 				int response = billingService.consumePurchase(Constants.GOOGLE_API_VERSION,
 															  contextPackageName,
-															  transaction.purchaseToken);
+						transaction.getPurchaseInfo().getPurchaseData().getPurchaseToken());
 				if (response == Constants.BILLING_RESPONSE_RESULT_OK)
 				{
 					cachedProducts.remove(productId);
@@ -983,9 +983,9 @@ public class BillingProcessor extends BillingBase
 
 	public boolean isValidTransactionDetails(TransactionDetails transactionDetails)
 	{
-		return verifyPurchaseSignature(transactionDetails.productId,
-				transactionDetails.purchaseInfo.getResponseData(),
-				transactionDetails.purchaseInfo.getSignature()) &&
+		return verifyPurchaseSignature(transactionDetails.getPurchaseInfo().getPurchaseData().getProductId(), // TODO nullability issues
+				transactionDetails.getPurchaseInfo().getResponseData(),
+				transactionDetails.getPurchaseInfo().getSignature()) &&
 			   checkMerchant(transactionDetails);
 	}
 
