@@ -79,8 +79,8 @@ class BillingCache extends BillingBase
 		for (String productId : data.keySet())
 		{
 			PurchaseInfo info = data.get(productId);
-			output.add(productId + LINE_DELIMITER + info.responseData + LINE_DELIMITER +
-					   info.signature);
+			output.add(productId + LINE_DELIMITER + info.getResponseData() + LINE_DELIMITER +
+                    info.getSignature());
 		}
 		saveString(getPreferencesCacheKey(), TextUtils.join(ENTRY_DELIMITER, output));
 		version = Long.toString(new Date().getTime());

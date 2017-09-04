@@ -29,8 +29,8 @@ public class PurchaseInfoParcelableTest
 
         PurchaseInfo newInfo = PurchaseInfo.CREATOR.createFromParcel(parcel);
 
-        assertEquals(purchaseInfo.responseData, newInfo.responseData);
-        assertEquals(purchaseInfo.signature, newInfo.signature);
+        assertEquals(purchaseInfo.getResponseData(), newInfo.getResponseData());
+        assertEquals(purchaseInfo.getSignature(), newInfo.getSignature());
     }
 
     @Test

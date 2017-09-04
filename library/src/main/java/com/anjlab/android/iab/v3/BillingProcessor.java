@@ -735,25 +735,25 @@ public class BillingProcessor extends BillingBase
 		{
 			return true;
 		}
-		if (details.purchaseInfo.purchaseData.getPurchaseTime().before(DATE_MERCHANT_LIMIT_1)) //newest format applied // TODO nullability issues
+		if (details.purchaseInfo.getPurchaseData().getPurchaseTime().before(DATE_MERCHANT_LIMIT_1)) //newest format applied // TODO nullability issues
 		{
 			return true;
 		}
-		if (details.purchaseInfo.purchaseData.getPurchaseTime().after(DATE_MERCHANT_LIMIT_2)) //newest format applied
+		if (details.purchaseInfo.getPurchaseData().getPurchaseTime().after(DATE_MERCHANT_LIMIT_2)) //newest format applied
 		{
 			return true;
 		}
-		if (details.purchaseInfo.purchaseData.getOrderId().trim().length() == 0)
+		if (details.purchaseInfo.getPurchaseData().getOrderId().trim().length() == 0)
 		{
 			return false;
 		}
-		int index = details.purchaseInfo.purchaseData.getOrderId().indexOf('.');
+		int index = details.purchaseInfo.getPurchaseData().getOrderId().indexOf('.');
 		if (index <= 0)
 		{
 			return false; //protect on missing merchant id
 		}
 		//extract merchant id
-		String merchantId = details.purchaseInfo.purchaseData.getOrderId().substring(0, index);
+		String merchantId = details.purchaseInfo.getPurchaseData().getOrderId().substring(0, index);
 		return merchantId.compareTo(developerMerchantId) == 0;
 	}
 
@@ -761,7 +761,7 @@ public class BillingProcessor extends BillingBase
 	private TransactionDetails getPurchaseTransactionDetails(String productId, BillingCache cache)
 	{
 		PurchaseInfo details = cache.getDetails(productId);
-		if (details != null && !TextUtils.isEmpty(details.responseData))
+		if (details != null && !TextUtils.isEmpty(details.getResponseData()))
 		{
 			return new TransactionDetails(details);
 		}
@@ -984,8 +984,8 @@ public class BillingProcessor extends BillingBase
 	public boolean isValidTransactionDetails(TransactionDetails transactionDetails)
 	{
 		return verifyPurchaseSignature(transactionDetails.productId,
-									   transactionDetails.purchaseInfo.responseData,
-									   transactionDetails.purchaseInfo.signature) &&
+				transactionDetails.purchaseInfo.getResponseData(),
+				transactionDetails.purchaseInfo.getSignature()) &&
 			   checkMerchant(transactionDetails);
 	}
 

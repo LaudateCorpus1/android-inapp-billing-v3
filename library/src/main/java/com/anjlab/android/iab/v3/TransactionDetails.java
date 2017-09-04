@@ -53,10 +53,10 @@ public class TransactionDetails implements Parcelable
 	public TransactionDetails(PurchaseInfo info)
 	{
 		purchaseInfo = info;
-		productId = purchaseInfo.purchaseData.getProductId();
-		orderId = purchaseInfo.purchaseData.getOrderId();
-		purchaseToken = purchaseInfo.purchaseData.getPurchaseToken();
-		purchaseTime = purchaseInfo.purchaseData.getPurchaseTime();
+		productId = purchaseInfo.getPurchaseData().getProductId();
+		orderId = purchaseInfo.getPurchaseData().getOrderId();
+		purchaseToken = purchaseInfo.getPurchaseData().getPurchaseToken();
+		purchaseTime = purchaseInfo.getPurchaseData().getPurchaseTime();
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class TransactionDetails implements Parcelable
 							 purchaseTime,
 							 orderId,
 							 purchaseToken,
-							 purchaseInfo.signature);
+				purchaseInfo.getSignature());
 	}
 
 	@Override
@@ -108,10 +108,10 @@ public class TransactionDetails implements Parcelable
 	protected TransactionDetails(Parcel in)
 	{
 		this.purchaseInfo = in.readParcelable(PurchaseInfo.class.getClassLoader());
-		this.productId = purchaseInfo.purchaseData.getProductId();
-		this.orderId = purchaseInfo.purchaseData.getOrderId();
-		this.purchaseToken = purchaseInfo.purchaseData.getPurchaseToken();
-		this.purchaseTime = purchaseInfo.purchaseData.getPurchaseTime();
+		this.productId = purchaseInfo.getPurchaseData().getProductId();
+		this.orderId = purchaseInfo.getPurchaseData().getOrderId();
+		this.purchaseToken = purchaseInfo.getPurchaseData().getPurchaseToken();
+		this.purchaseTime = purchaseInfo.getPurchaseData().getPurchaseTime();
 	}
 
 	public static final Parcelable.Creator<TransactionDetails> CREATOR =
