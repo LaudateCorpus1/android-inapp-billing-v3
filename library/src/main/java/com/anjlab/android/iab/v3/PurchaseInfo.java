@@ -61,17 +61,18 @@ public class PurchaseInfo implements Parcelable
         try
         {
             JSONObject json = new JSONObject(responseData);
-            PurchaseData data = new PurchaseData();
-            data.orderId = json.optString(Constants.RESPONSE_ORDER_ID);
-            data.packageName = json.optString(Constants.RESPONSE_PACKAGE_NAME);
-            data.productId = json.optString(Constants.RESPONSE_PRODUCT_ID);
+
             long purchaseTimeMillis = json.optLong(Constants.RESPONSE_PURCHASE_TIME, 0);
-            data.purchaseTime = purchaseTimeMillis != 0 ? new Date(purchaseTimeMillis) : null;
-            data.purchaseState = PurchaseState.values()[json.optInt(Constants.RESPONSE_PURCHASE_STATE, 1)];
-            data.developerPayload = json.optString(Constants.RESPONSE_DEVELOPER_PAYLOAD);
-            data.purchaseToken = json.getString(Constants.RESPONSE_PURCHASE_TOKEN);
-            data.autoRenewing = json.optBoolean(Constants.RESPONSE_AUTO_RENEWING);
-            return data;
+
+            return new PurchaseData(json.optString(Constants.RESPONSE_ORDER_ID),
+                    json.optString(Constants.RESPONSE_ORDER_ID),
+                    json.optString(Constants.RESPONSE_PRODUCT_ID),
+                    purchaseTimeMillis != 0 ? new Date(purchaseTimeMillis) : null,
+                    PurchaseState.values()[json.optInt(Constants.RESPONSE_PURCHASE_STATE, 1)],
+                    json.optString(Constants.RESPONSE_DEVELOPER_PAYLOAD),
+                    json.getString(Constants.RESPONSE_PURCHASE_TOKEN),
+                    json.optBoolean(Constants.RESPONSE_AUTO_RENEWING)
+            );
         }
         catch (JSONException e)
         {
@@ -128,7 +129,7 @@ public class PurchaseInfo implements Parcelable
         PurchaseInfo other = (PurchaseInfo) o;
         return responseData.equals(other.responseData)
                && signature.equals(other.signature)
-               && purchaseData.purchaseToken.equals(other.purchaseData.purchaseToken)
-               && purchaseData.purchaseTime.equals(other.purchaseData.purchaseTime);
+               && purchaseData.getPurchaseToken().equals(other.purchaseData.getPurchaseToken())
+               && purchaseData.getPurchaseTime().equals(other.purchaseData.getPurchaseTime()); // TODO nullability issues
     }
 }

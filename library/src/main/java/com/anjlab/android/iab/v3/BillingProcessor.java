@@ -43,6 +43,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class BillingProcessor extends BillingBase
 {
 	/**
@@ -734,26 +735,25 @@ public class BillingProcessor extends BillingBase
 		{
 			return true;
 		}
-		if (details.purchaseInfo.purchaseData.purchaseTime.before(DATE_MERCHANT_LIMIT_1)) //newest format applied
+		if (details.purchaseInfo.purchaseData.getPurchaseTime().before(DATE_MERCHANT_LIMIT_1)) //newest format applied // TODO nullability issues
 		{
 			return true;
 		}
-		if (details.purchaseInfo.purchaseData.purchaseTime.after(DATE_MERCHANT_LIMIT_2)) //newest format applied
+		if (details.purchaseInfo.purchaseData.getPurchaseTime().after(DATE_MERCHANT_LIMIT_2)) //newest format applied
 		{
 			return true;
 		}
-		if (details.purchaseInfo.purchaseData.orderId == null ||
-			details.purchaseInfo.purchaseData.orderId.trim().length() == 0)
+		if (details.purchaseInfo.purchaseData.getOrderId().trim().length() == 0)
 		{
 			return false;
 		}
-		int index = details.purchaseInfo.purchaseData.orderId.indexOf('.');
+		int index = details.purchaseInfo.purchaseData.getOrderId().indexOf('.');
 		if (index <= 0)
 		{
 			return false; //protect on missing merchant id
 		}
 		//extract merchant id
-		String merchantId = details.purchaseInfo.purchaseData.orderId.substring(0, index);
+		String merchantId = details.purchaseInfo.purchaseData.getOrderId().substring(0, index);
 		return merchantId.compareTo(developerMerchantId) == 0;
 	}
 

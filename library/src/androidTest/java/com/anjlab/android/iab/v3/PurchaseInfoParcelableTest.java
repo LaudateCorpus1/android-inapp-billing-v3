@@ -44,13 +44,13 @@ public class PurchaseInfoParcelableTest
 
         PurchaseData newData = PurchaseData.CREATOR.createFromParcel(parcel);
 
-        assertEquals(responseData.autoRenewing, newData.autoRenewing);
-        assertEquals(responseData.purchaseToken, newData.purchaseToken);
-        assertEquals(responseData.developerPayload, newData.developerPayload);
-        assertEquals(responseData.purchaseState, newData.purchaseState);
-        assertEquals(responseData.purchaseTime, newData.purchaseTime);
-        assertEquals(responseData.productId, newData.productId);
-        assertEquals(responseData.packageName, newData.packageName);
-        assertEquals(responseData.orderId, newData.orderId);
+        assertEquals(responseData.getAutoRenewing(), newData.getAutoRenewing());
+        assertEquals(responseData.getPurchaseToken(), newData.getPurchaseToken());
+        assertEquals(responseData.getDeveloperPayload(), newData.getDeveloperPayload());
+        assertEquals(responseData.getPurchaseState(), newData.getPurchaseState());
+        assertEquals(responseData.getPurchaseTime(), newData.getPurchaseTime());
+        assertEquals(responseData.getProductId(), newData.getProductId());
+        assertEquals(responseData.getPackageName(), newData.getPackageName());
+        assertEquals(responseData.getOrderId(), newData.getOrderId());
     }
 }
