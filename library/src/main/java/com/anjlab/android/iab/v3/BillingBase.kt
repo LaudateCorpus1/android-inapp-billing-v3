@@ -38,7 +38,7 @@ internal open class BillingBase(val context: Context) {
         return false
     }
 
-    fun loadString(key: String, defValue: String): String? =
+    fun loadString(key: String, defValue: String): String =
             preferences?.getString(key, defValue) ?: defValue
 
     fun saveBoolean(key: String, value: Boolean): Boolean {

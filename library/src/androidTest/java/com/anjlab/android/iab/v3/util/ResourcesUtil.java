@@ -6,14 +6,14 @@ public class ResourcesUtil
 {
     public static String loadFile(String path)
     {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         Scanner sc = null;
         try
         {
             sc = new Scanner(ResourcesUtil.class.getClassLoader().getResourceAsStream(path));
             while (sc.hasNextLine())
             {
-                result += sc.nextLine();
+                result.append(sc.nextLine());
             }
             sc.close();
         }
@@ -24,6 +24,6 @@ public class ResourcesUtil
                 sc.close();
             }
         }
-        return result;
+        return result.toString();
     }
 }

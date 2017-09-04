@@ -31,7 +31,7 @@ const val LOG_TAG = "iabv3.purchaseInfo"
  * [here](https://github.com/mgoldsborough/google-play-in-app-billing-verification/blob/master/library/GooglePlay/InAppBilling/GooglePlayResponseValidator.php#L64)
  */
 data class PurchaseInfo(val responseData: String,
-                        val signature: String) : Parcelable {
+                        val signature: String?) : Parcelable {
     val purchaseData: PurchaseData?
 
     init {
@@ -62,7 +62,6 @@ data class PurchaseInfo(val responseData: String,
             Log.e(LOG_TAG, "Failed to parse response data", e)
             return null
         }
-
     }
 
     override fun describeContents() = 0
