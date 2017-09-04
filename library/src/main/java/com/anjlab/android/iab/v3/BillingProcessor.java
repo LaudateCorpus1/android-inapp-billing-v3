@@ -973,7 +973,7 @@ public class BillingProcessor extends BillingBase
              * continue the purchase flow
              */
 			return TextUtils.isEmpty(signatureBase64) ||
-				   Security.verifyPurchase(productId, signatureBase64, purchaseData, dataSignature);
+				   Security.INSTANCE.verifyPurchase(productId, signatureBase64, purchaseData, dataSignature);
 		}
 		catch (Exception e)
 		{
