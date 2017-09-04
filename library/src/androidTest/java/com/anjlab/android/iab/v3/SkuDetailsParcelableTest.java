@@ -9,40 +9,33 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-public class SkuDetailsParcelableTest
-{
+public class SkuDetailsParcelableTest {
     @Test
-    public void testParcelableInApp() throws Exception
-    {
+    public void testParcelableInApp() throws Exception {
         testParcelable(loadSkuDetails("sku_in_app.json"), false, false);
     }
 
     @Test
-    public void testParcelableSubscription() throws Exception
-    {
+    public void testParcelableSubscription() throws Exception {
         testParcelable(loadSkuDetails("sku_subscription.json"), false, false);
     }
 
     @Test
-    public void testParcelableSubscriptionIntroductory() throws Exception
-    {
+    public void testParcelableSubscriptionIntroductory() throws Exception {
         testParcelable(loadSkuDetails("sku_subscription_introductory.json"), true, false);
     }
 
     @Test
-    public void testParcelableSubscriptionTrial() throws Exception
-    {
+    public void testParcelableSubscriptionTrial() throws Exception {
         testParcelable(loadSkuDetails("sku_subscription_trial.json"), false, true);
     }
 
-    private SkuDetails loadSkuDetails(String jsonFilePath) throws Exception
-    {
+    private SkuDetails loadSkuDetails(String jsonFilePath) throws Exception {
         JSONObject details = new JSONObject(ResourcesUtil.loadFile(jsonFilePath));
         return new SkuDetails(details);
     }
 
-    private void testParcelable(SkuDetails skuDetails, boolean isIntroPrice, boolean isTrial) throws Exception
-    {
+    private void testParcelable(SkuDetails skuDetails, boolean isIntroPrice, boolean isTrial) throws Exception {
         Parcel parcel = Parcel.obtain();
 
         skuDetails.writeToParcel(parcel, 0);
@@ -51,25 +44,25 @@ public class SkuDetailsParcelableTest
 
         SkuDetails result = SkuDetails.CREATOR.createFromParcel(parcel);
 
-        assertEquals(skuDetails.productId, result.productId);
-        assertEquals(skuDetails.priceLong, result.priceLong);
-        assertEquals(skuDetails.priceText, result.priceText);
-        assertEquals(skuDetails.priceValue, result.priceValue);
-        assertEquals(skuDetails.description, result.description);
-        assertEquals(skuDetails.isSubscription, result.isSubscription);
-        assertEquals(skuDetails.currency, result.currency);
-        assertEquals(skuDetails.title, result.title);
-        assertEquals(skuDetails.subscriptionPeriod, result.subscriptionPeriod);
-        assertEquals(skuDetails.subscriptionFreeTrialPeriod, result.subscriptionFreeTrialPeriod);
-        assertEquals(skuDetails.haveTrialPeriod, result.haveTrialPeriod);
-        assertEquals(skuDetails.introductoryPriceValue, result.introductoryPriceValue);
-        assertEquals(skuDetails.introductoryPricePeriod, result.introductoryPricePeriod);
-        assertEquals(skuDetails.introductoryPriceCycles, result.introductoryPriceCycles);
-        assertEquals(skuDetails.introductoryPriceLong, result.introductoryPriceLong);
-        assertEquals(skuDetails.haveIntroductoryPeriod, result.haveIntroductoryPeriod);
-        assertEquals(skuDetails.introductoryPriceText, result.introductoryPriceText);
+        assertEquals(skuDetails.getProductId(), result.getProductId());
+        assertEquals(skuDetails.getPriceLong(), result.getPriceLong());
+        assertEquals(skuDetails.getPriceText(), result.getPriceText());
+        assertEquals(skuDetails.getPriceValue(), result.getPriceValue());
+        assertEquals(skuDetails.getDescription(), result.getDescription());
+        assertEquals(skuDetails.isSubscription(), result.isSubscription());
+        assertEquals(skuDetails.getCurrency(), result.getCurrency());
+        assertEquals(skuDetails.getTitle(), result.getTitle());
+        assertEquals(skuDetails.getSubscriptionPeriod(), result.getSubscriptionPeriod());
+        assertEquals(skuDetails.getSubscriptionFreeTrialPeriod(), result.getSubscriptionFreeTrialPeriod());
+        assertEquals(skuDetails.getHaveTrialPeriod(), result.getHaveTrialPeriod());
+        assertEquals(skuDetails.getIntroductoryPriceValue(), result.getIntroductoryPriceValue());
+        assertEquals(skuDetails.getIntroductoryPricePeriod(), result.getIntroductoryPricePeriod());
+        assertEquals(skuDetails.getIntroductoryPriceCycles(), result.getIntroductoryPriceCycles());
+        assertEquals(skuDetails.getIntroductoryPriceLong(), result.getIntroductoryPriceLong());
+        assertEquals(skuDetails.getHaveIntroductoryPeriod(), result.getHaveIntroductoryPeriod());
+        assertEquals(skuDetails.getIntroductoryPriceText(), result.getIntroductoryPriceText());
 
-        assertEquals(skuDetails.haveIntroductoryPeriod, isIntroPrice);
-        assertEquals(skuDetails.haveTrialPeriod, isTrial);
+        assertEquals(skuDetails.getHaveIntroductoryPeriod(), isIntroPrice);
+        assertEquals(skuDetails.getHaveTrialPeriod(), isTrial);
     }
 }

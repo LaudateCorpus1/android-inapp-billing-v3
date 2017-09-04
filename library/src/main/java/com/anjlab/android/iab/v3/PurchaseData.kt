@@ -49,7 +49,7 @@ data class PurchaseData(val orderId: String,
             purchaseStateFromInt(inParcel.readInt()),
             inParcel.readString(),
             inParcel.readString(),
-            booleanFromByte(inParcel.readByte())
+            inParcel.readByte() != 0.toByte()
     )
 
     companion object {
@@ -71,5 +71,3 @@ data class PurchaseData(val orderId: String,
 fun dateFromLong(purchaseTime: Long): Date? = if (purchaseTime != -1L) Date(purchaseTime) else null
 
 fun purchaseStateFromInt(purchaseState: Int): PurchaseState? = if (purchaseState != -1) PurchaseState.values()[purchaseState] else null
-
-fun booleanFromByte(autoRenewing: Byte) = autoRenewing != 0.toByte()
