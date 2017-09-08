@@ -20,6 +20,7 @@ public class TransactionDetailsParcelableTest {
         details.writeToParcel(parcel, 0);
         parcel.setDataPosition(0);
 
+//        TransactionDetails result = TransactionDetails.Companion.create(parcel); // TODO will this work when parceled by Android OS?
         TransactionDetails result = TransactionDetails.CREATOR.createFromParcel(parcel);
 
         assertEquals(details.getPurchaseInfo(), result.getPurchaseInfo());

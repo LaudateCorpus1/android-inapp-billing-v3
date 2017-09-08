@@ -17,8 +17,19 @@ package com.anjlab.android.iab.v3
 
 import android.os.Parcel
 import android.os.Parcelable
+import kotlinx.android.parcel.Parceler
+import kotlinx.android.parcel.Parcelize
 
+//@Parcelize
 data class TransactionDetails(val purchaseInfo: PurchaseInfo) : Parcelable {
+
+//    companion object : Parceler<TransactionDetails> {
+//        override fun create(parcel: Parcel) = TransactionDetails(parcel.loadParcelable())
+//
+//        override fun TransactionDetails.write(parcel: Parcel, flags: Int) {
+//            parcel.writeParcelable(purchaseInfo, flags)
+//        }
+//    }
 
     override fun describeContents() = 0
 

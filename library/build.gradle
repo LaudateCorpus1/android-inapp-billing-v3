@@ -3,6 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'checkstyle'
 apply plugin: 'kotlin-android'
+apply plugin: "org.jetbrains.kotlin.android.extensions"
 
 group 'com.anjlab.android.iab.v3'
 version '1.0.44'
@@ -31,6 +32,9 @@ android {
             }
         }
     }
+}
+androidExtensions {
+    experimental = true
 }
 
 dependencies {
