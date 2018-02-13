@@ -47,16 +47,16 @@ data class PurchaseInfo(val responseData: String,
         try {
             val json = JSONObject(responseData)
 
-            val purchaseTimeMillis = json.optLong(Constants.RESPONSE_PURCHASE_TIME, 0)
+            val purchaseTimeMillis = json.optLong(RESPONSE_PURCHASE_TIME, 0)
 
-            return PurchaseData(json.optString(Constants.RESPONSE_ORDER_ID),
-                    json.optString(Constants.RESPONSE_ORDER_ID),
-                    json.optString(Constants.RESPONSE_PRODUCT_ID),
+            return PurchaseData(json.optString(RESPONSE_ORDER_ID),
+                    json.optString(RESPONSE_ORDER_ID),
+                    json.optString(RESPONSE_PRODUCT_ID),
                     if (purchaseTimeMillis != 0L) Date(purchaseTimeMillis) else null,
-                    PurchaseState.values()[json.optInt(Constants.RESPONSE_PURCHASE_STATE, 1)],
-                    json.optString(Constants.RESPONSE_DEVELOPER_PAYLOAD),
-                    json.getString(Constants.RESPONSE_PURCHASE_TOKEN),
-                    json.optBoolean(Constants.RESPONSE_AUTO_RENEWING)
+                    PurchaseState.values()[json.optInt(RESPONSE_PURCHASE_STATE, 1)],
+                    json.optString(RESPONSE_DEVELOPER_PAYLOAD),
+                    json.getString(RESPONSE_PURCHASE_TOKEN),
+                    json.optBoolean(RESPONSE_AUTO_RENEWING)
             )
         } catch (e: JSONException) {
             Log.e(LOG_TAG, "Failed to parse response data", e)

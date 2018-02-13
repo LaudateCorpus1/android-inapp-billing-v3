@@ -1,19 +1,13 @@
 apply plugin: 'com.android.application'
 
-dependencies {
-    compile project(':library')
-//    compile fileTree(dir: 'libs', include: '*.jar')
-}
-
 android {
-    compileSdkVersion 23
-    buildToolsVersion '25.0.3'
+    compileSdkVersion 27
 
     defaultConfig {
         versionCode 2
         versionName '1.0'
-        minSdkVersion 8
-        targetSdkVersion 23
+        minSdkVersion 14
+        targetSdkVersion 27
     }
 
     sourceSets.main {
@@ -48,4 +42,8 @@ android {
     if (project.hasProperty('keyStoreKeyPassword')) {
         android.signingConfigs.release.keyPassword = keyStoreKeyPassword
     }
+}
+
+dependencies {
+    implementation project(':library')
 }

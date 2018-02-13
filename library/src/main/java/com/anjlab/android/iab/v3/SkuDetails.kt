@@ -56,19 +56,19 @@ data class SkuDetails(val productId: String?,
 
     @Throws(JSONException::class)
     constructor(source: JSONObject) : this(
-            source.optString(Constants.RESPONSE_PRODUCT_ID),
-            source.optString(Constants.RESPONSE_TITLE),
-            source.optString(Constants.RESPONSE_DESCRIPTION),
-            isSub(source.optString(Constants.RESPONSE_TYPE)),
-            source.optString(Constants.RESPONSE_PRICE_CURRENCY),
-            source.optLong(Constants.RESPONSE_PRICE_MICROS),
-            source.optString(Constants.RESPONSE_SUBSCRIPTION_PERIOD),
-            source.optString(Constants.RESPONSE_FREE_TRIAL_PERIOD),
-            source.optString(Constants.RESPONSE_INTRODUCTORY_PRICE_PERIOD),
-            source.optInt(Constants.RESPONSE_INTRODUCTORY_PRICE_CYCLES),
-            source.optString(Constants.RESPONSE_PRICE),
-            source.optLong(Constants.RESPONSE_INTRODUCTORY_PRICE_MICROS),
-            source.optString(Constants.RESPONSE_INTRODUCTORY_PRICE)
+            source.optString(RESPONSE_PRODUCT_ID),
+            source.optString(RESPONSE_TITLE),
+            source.optString(RESPONSE_DESCRIPTION),
+            isSub(source.optString(RESPONSE_TYPE)),
+            source.optString(RESPONSE_PRICE_CURRENCY),
+            source.optLong(RESPONSE_PRICE_MICROS),
+            source.optString(RESPONSE_SUBSCRIPTION_PERIOD),
+            source.optString(RESPONSE_FREE_TRIAL_PERIOD),
+            source.optString(RESPONSE_INTRODUCTORY_PRICE_PERIOD),
+            source.optInt(RESPONSE_INTRODUCTORY_PRICE_CYCLES),
+            source.optString(RESPONSE_PRICE),
+            source.optLong(RESPONSE_INTRODUCTORY_PRICE_MICROS),
+            source.optString(RESPONSE_INTRODUCTORY_PRICE)
     )
 
     override fun toString(): String {
@@ -131,4 +131,4 @@ data class SkuDetails(val productId: String?,
     }
 }
 
-fun isSub(responseType: String?) = responseType?.equals(Constants.PRODUCT_TYPE_SUBSCRIPTION, ignoreCase = true) ?: false
+fun isSub(responseType: String?) = responseType?.equals(PRODUCT_TYPE_SUBSCRIPTION, ignoreCase = true) ?: false
